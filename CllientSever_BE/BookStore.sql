@@ -41,8 +41,8 @@ create table SACH(
 	tenSach nvarchar(255),
 	donGia decimal(18,0),
 	moTa nvarchar(MAX),
-	ngayCapNhat timestamp,
-	ngayTao timestamp,
+	ngayCapNhat datetime,
+	ngayTao datetime,
 	hinhAnhChinh nvarchar(MAX),
 	dsHinhAnhPhu nvarchar(MAX),
 	soLuongMua int,
@@ -64,8 +64,8 @@ create table KHACHHANG(
 )
 create table DONHANG(
 	maDonHang int identity(1,1) primary key,
-	ngayDat timestamp,
-	ngayGiaoDuKien timestamp,
+	ngayDat datetime,
+	ngayGiaoDuKien datetime,
 	tinhTrangGiaoHang nvarchar(MAX),
 	daThanhToan bit default 0,
 	maKhachHang int,
@@ -75,7 +75,7 @@ create table DONHANG(
 create table PHANHOI(
 	maPhanHoi int identity(1,1) primary key,
 	noiDung nvarchar(MAX),
-	ngayTao timestamp,
+	ngayTao datetime,
 	danhGia int,
 	maSach int,
 	maThanhVien int,
