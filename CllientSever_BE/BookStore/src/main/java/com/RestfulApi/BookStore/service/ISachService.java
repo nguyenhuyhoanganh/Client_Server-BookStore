@@ -9,12 +9,14 @@ public interface ISachService {
 	public List<SachModel> getAll();
 
 	public SachModel getById(int id);
-	
+
 	public SachModel create(SachModel sachModel);
-	
+
 	public void delete(int id);
-	
-	public SachModel update(SachModel sachModel);
-	
+
+	public SachModel update(int id, SachModel sachModel);
+
 	public List<SachModel> search();
+	
+	public long Count();
 }

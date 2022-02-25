@@ -1,8 +1,17 @@
 # Book-Store Restful API
+
 ## Book
-1. _Get All Books:_ Method: GET >  http://localhost:8080/api/v1/books
-2. _Get Book:_ Method: GET > http://localhost:8080/api/v1/books/{id_book}
-3. _Create New Book:_ Method: POST > http://localhost:8080/api/v1/books
+
+|       Book        |
+| :---------------: | :--------: | :--------------------------------------------: |
+|   Request name    |   Method   |                      Link                      |
+| :---------------: | :--------: | :--------------------------------------------: |
+|  _Get All Books_  |    GET     |       http://localhost:8080/api/v1/books       |
+|    _Get Book_     |    GET     |  http://localhost:8080/api/v1/books/{id_book}  |
+|   _Creat Book_    |    POST    |       http://localhost:8080/api/v1/books       |
+|   _Update Book_   |   PATCH    |  http://localhost:8080/api/v1/books/{id_book}  |
+|   _Delete Book_   |   DELETE   |  http://localhost:8080/api/v1/books/{id_book}  |
+
 ```
 {
     "tenSach": "Và Rồi, Tháng 9 Không Có Cậu Đã Tới",
@@ -16,4 +25,3 @@
     "maTheLoai": 1
 }
 ```
-4. _Delete Book:_ Method: DELETE > http://localhost:8080/api/v1/books/{id_book}

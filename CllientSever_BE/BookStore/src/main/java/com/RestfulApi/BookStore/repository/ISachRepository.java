@@ -6,5 +6,4 @@ import com.RestfulApi.BookStore.entity.Sach;
 
 public interface ISachRepository extends JpaRepository<Sach, Integer>{
 
-	
 }
