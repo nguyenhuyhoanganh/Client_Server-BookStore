@@ -6,7 +6,7 @@ import com.RestfulApi.BookStore.model.SachModel;
 
 public interface ISachService {
 
-	public List<SachModel> getAll();
+	public List<SachModel> getAll(String search, Integer page, Integer limit, String sortBy);
 
 	public SachModel getById(int id);
 
@@ -15,8 +15,6 @@ public interface ISachService {
 	public void delete(int id);
 
 	public SachModel update(int id, SachModel sachModel);
-
-	public List<SachModel> search();
 	
 	public long Count();
 }

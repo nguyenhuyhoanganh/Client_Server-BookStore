@@ -3,8 +3,13 @@ package com.RestfulApi.BookStore.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +22,7 @@ import com.RestfulApi.BookStore.repository.INhaxuatbanRepository;
 import com.RestfulApi.BookStore.repository.ISachRepository;
 import com.RestfulApi.BookStore.repository.ITheloaiRepository;
 import com.RestfulApi.BookStore.service.ISachService;
+import com.RestfulApi.BookStore.util.SachSpecificationsBuilder;
 
 @Service
 @Transactional
@@ -30,13 +36,45 @@ public class SachServiceImpl implements ISachService {
 	private INhaxuatbanRepository nhaxuatbanRepository;
 
 	@Override
-	public List<SachModel> getAll() {
-		List<SachModel> listSachModel = new ArrayList<SachModel>();
-		for (Sach sach : sachRepository.findAll()) {
-			SachModel sachModel = mapToModel(sach);
-			listSachModel.add(sachModel);
+	public List<SachModel> getAll(String search, Integer page, Integer limit, String sortBy) {
+		List<SachModel> listSachModels = new ArrayList<SachModel>();
+
+		// search
+		SachSpecificationsBuilder builder = new SachSpecificationsBuilder();
+		Pattern patternSearch = Pattern.compile("(\\w+?)(:|<|>)(\\w+( +\\w+)*$?),", Pattern.UNICODE_CHARACTER_CLASS);
+		Matcher matcherSearch = patternSearch.matcher(search + ",");
+		while (matcherSearch.find()) {
+			if (matcherSearch.group(1).compareTo("maTheLoai") == 0) {
+				builder.with("theloai", matcherSearch.group(2),
+						theloaiRepository.findById(Integer.parseInt(matcherSearch.group(3))).get());
+			} else if (matcherSearch.group(1).compareTo("maNhaXuatBan") == 0) {
+				builder.with("nhasanxuat", matcherSearch.group(2),
+						nhaxuatbanRepository.findById(Integer.parseInt(matcherSearch.group(3))).get());
+			} else {
+				builder.with(matcherSearch.group(1), matcherSearch.group(2), matcherSearch.group(3));
+			}
 		}
-		return listSachModel;
+
+		// sort
+		List<String> sortList = new ArrayList<String>();
+		Pattern patternSortBy = Pattern.compile("(\\w+?),");
+		Matcher matcherSortBy = patternSortBy.matcher(sortBy + ",");
+		while (matcherSortBy.find()) {
+			sortList.add(matcherSortBy.group(1));
+		}
+		String[] sortArr = new String[sortList.size()];
+		sortList.toArray(sortArr);
+		Specification<Sach> spec = builder.build();
+
+		// pagination
+		List<Sach> listSaches = sachRepository.findAll(spec, PageRequest.of(page, limit, Sort.by(sortArr))).toList();
+
+		// convert to Model
+		for (Sach sach : listSaches) {
+			SachModel sachModel = mapToModel(sach);
+			listSachModels.add(sachModel);
+		}
+		return listSachModels;
 	}
 
 	@Override
@@ -67,12 +105,6 @@ public class SachServiceImpl implements ISachService {
 		sach = updatetoEntity(sachModel, sach);
 		sachRepository.save(sach);
 		return mapToModel(sach);
-	}
-
-	@Override
-	public List<SachModel> search() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

@@ -10,6 +10,20 @@
 | _Update Book_    |   PATCH    | http://localhost:8080/api/v1/books/{id_book} |
 | _Delete Book_    |   DELETE   | http://localhost:8080/api/v1/books/{id_book} |
 
+### Get All Books (with query string)
+
+http://localhost:8080/api/v1/books?search=tenSach:Doragon,donGia>15000&page=0&limit=2&sortBy=tenSach,hinhAnhChinh
+http://localhost:8080/api/v1/books?page=0&limit=1&sortBy=tenSach,hinhAnhChinh&search=maNhaXuatBan:1,tenSach:Doraemon,donGia>111000F
+
+|  Key   | Query                                                | Character |
+| :----: | ---------------------------------------------------- | :-------: | --- |
+| search | GREATER_THAN_OR_EQUAL                                |     >     |
+|   ^^   | LESS_THAN_OR_EQUAL                                   |     <     |
+|   ^^   | EQUALS/LIKE                                          |     :     |
+| limit  | default = data.lenght                                |           |
+|  page  | default = 0                                          |           |     |
+|  sort  | default = maSach,can sortcan sort by multiple fields |           |     |
+
 ```
 {
     "tenSach": "Và Rồi, Tháng 9 Không Có Cậu Đã Tới",

@@ -15,30 +15,38 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(NotFoundException.class)
 	public ResponseEntity<Object> handleEntityNotFoundException(NotFoundException ex, WebRequest request) {
-		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(),HttpStatus.NOT_FOUND, HttpStatus.NOT_FOUND.value(), ex.getMessage(),
-				request.getDescription(false));
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), HttpStatus.NOT_FOUND,
+				HttpStatus.NOT_FOUND.value(), ex.getMessage(), request.getDescription(false));
 		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	protected ResponseEntity<Object> handleValid(MethodArgumentNotValidException ex, WebRequest request) {
-		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(),HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value(),
-				ex.getBindingResult().getAllErrors().get(0).getDefaultMessage(), request.getDescription(false));
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), HttpStatus.BAD_REQUEST,
+				HttpStatus.BAD_REQUEST.value(), ex.getBindingResult().getAllErrors().get(0).getDefaultMessage(),
+				request.getDescription(false));
 		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	protected ResponseEntity<Object> handleValid(HttpMessageNotReadableException ex, WebRequest request) {
-		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(),HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value(),
-				"Invalid input data", request.getDescription(false));
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), HttpStatus.BAD_REQUEST,
+				HttpStatus.BAD_REQUEST.value(), "Invalid input data", request.getDescription(false));
 		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
 	}
 
-//	@ExceptionHandler(Exception.class)
-//	public ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
-//		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), HttpStatus.INTERNAL_SERVER_ERROR.value(),
-//				"Some thing went wrong...", request.getDescription(false));
-//		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+//	@ExceptionHandler(IllegalArgumentException.class)
+//	protected ResponseEntity<Object> handleIllegalArgument(IllegalArgumentException ex, WebRequest request) {
+//		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), HttpStatus.BAD_REQUEST,
+//				HttpStatus.BAD_REQUEST.value(), ex.getMessage(), request.getDescription(false));
+//		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
 //	}
+
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), HttpStatus.INTERNAL_SERVER_ERROR,
+				HttpStatus.INTERNAL_SERVER_ERROR.value(), "Some thing went wrong...", request.getDescription(false));
+		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 
 }

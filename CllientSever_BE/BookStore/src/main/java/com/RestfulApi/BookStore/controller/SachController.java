@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -32,11 +33,11 @@ public class SachController {
 	@Autowired
 	private ISachService sachService;
 
-	@GetMapping(value = "/books")
-	public List<SachModel> getAll() {
-		List<SachModel> listSach = sachService.getAll();
-		return listSach;
-	}
+//	@GetMapping(value = "/books")
+//	public List<SachModel> getAll() {
+//		List<SachModel> listSach = sachService.getAll();
+//		return listSach;
+//	}
 
 	@GetMapping(value = "/books/{id}")
 	public SachModel getOne(@PathVariable int id) {
@@ -68,5 +69,19 @@ public class SachController {
 			@RequestBody @Validated(OnUpdate.class) SachModel sachModel) {
 		sachModel.setNgayCapNhat(new Timestamp(new Date().getTime()));
 		return ResponseEntity.ok().body(sachService.update(id, sachModel));
+	}
+
+	@GetMapping(value = "/books")
+	public List<SachModel> getAll(@RequestParam(value = "search", required = false) String search,
+			@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "limit", required = false) Integer limit,
+			@RequestParam(value = "sortBy", required = false) String sortBy) {
+		if (search != null)
+			search = search.replaceAll("\\s\\s+", " ").trim();
+		page = page == null ? page = 0 : page;
+		limit = limit == null ? limit = (int) sachService.Count() : limit;
+		sortBy = sortBy == null ? sortBy = "maSach" : sortBy.replaceAll("\\s\\s+", " ").trim();
+		// loại bỏ khoảng trắng trung lặp đầu cuối
+		return sachService.getAll(search, page, limit, sortBy);
 	}
 }
