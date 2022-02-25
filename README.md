@@ -74,12 +74,13 @@
 </tr>
 <tr>
 <td align="left">sortBy</td>
-<td align="left" colspan="2">default = maSach, can sortcan sort by multiple fields</td>
+<td align="left" colspan="2">default = maSach, can sort by multiple fields</td>
 </tr>
 </tbody>
 </table>
 
-> Raw json (POST UPDATE)
+> Create Book, Update Book
+> > raw json
 
 ```
 {
