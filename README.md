@@ -2,15 +2,15 @@
 
 ## Book
 
-|       Book        |
-| :---------------: | :--------: | :--------------------------------------------: |
-|   Request name    |   Method   |                      Link                      |
-| :---------------: | :--------: | :--------------------------------------------: |
-|  _Get All Books_  |    GET     |       http://localhost:8080/api/v1/books       |
-|    _Get Book_     |    GET     |  http://localhost:8080/api/v1/books/{id_book}  |
-|   _Creat Book_    |    POST    |       http://localhost:8080/api/v1/books       |
-|   _Update Book_   |   PATCH    |  http://localhost:8080/api/v1/books/{id_book}  |
-|   _Delete Book_   |   DELETE   |  http://localhost:8080/api/v1/books/{id_book}  |
+| Table           |    Book    |                                              |
+| --------------- | :--------: | -------------------------------------------- |
+| Request name    |   Method   | Link                                         |
+| --------------- | :--------: | -------------------------------------------- |
+| _Get All Books_ |    GET     | http://localhost:8080/api/v1/books           |
+| _Get Book_      |    GET     | http://localhost:8080/api/v1/books/{id_book} |
+| _Creat Book_    |    POST    | http://localhost:8080/api/v1/books           |
+| _Update Book_   |   PATCH    | http://localhost:8080/api/v1/books/{id_book} |
+| _Delete Book_   |   DELETE   | http://localhost:8080/api/v1/books/{id_book} |
 
 ```
 {
