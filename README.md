@@ -8,34 +8,34 @@
 </thead>
 <tbody>
 <tr>
-<td align="right">**Request name**</td>
+<td align="left">**Request name**</td>
 <td align="center">**Method**</td>
-<td align="right">**Link**</td>
+<td align="left">**Link**</td>
 </tr>
 <tr>
-<td align="right">_Get All Books_</td>
+<td align="left">_Get All Books_</td>
 <td align="center">GET</td>
-<td align="right">http://localhost:8080/api/v1/books</td>
+<td align="left">http://localhost:8080/api/v1/books</td>
 </tr>
 <tr>
-<td align="right">_Get Book_</td>
+<td align="left">_Get Book_</td>
 <td align="center">GET</td>
-<td align="right">http://localhost:8080/api/v1/books/{id_book}</td>
+<td align="left">http://localhost:8080/api/v1/books/{id_book}</td>
 </tr>
 <tr>
-<td align="right">_Create Book_</td>
+<td align="left">_Create Book_</td>
 <td align="center">POST</td>
-<td align="right">http://localhost:8080/api/v1/books</td>
+<td align="left">http://localhost:8080/api/v1/books</td>
 </tr>
 <tr>
-<td align="right">_Update Book_</td>
+<td align="left">_Update Book_</td>
 <td align="center">PATCH</td>
-<td align="right">http://localhost:8080/api/v1/books/{id_book}</td>
+<td align="left">http://localhost:8080/api/v1/books/{id_book}</td>
 </tr>
 <tr>
-<td align="right">_Delete Book_</td>
+<td align="left">_Delete Book_</td>
 <td align="center">DELTE</td>
-<td align="right">http://localhost:8080/api/v1/books/{id_book}</td>
+<td align="left">http://localhost:8080/api/v1/books/{id_book}</td>
 </tr>
 </tbody>
 </table>
@@ -45,38 +45,38 @@
 <table>
 <thead>
 <tr>
-<th align="right">Key</th>
+<th align="left">Key</th>
 <th align="center" colspan="2">Query</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="right" rowspan="3">search</td>
-<td align="right">GREATER_THAN_OR_EQUAL</td>
+<td align="left" rowspan="3">search</td>
+<td align="left">GREATER_THAN_OR_EQUAL</td>
 <td align="center">></td>
 </tr>
 <tr>
-<td align="right">LESS_THAN_OR_EQUAL</td>
+<td align="left">LESS_THAN_OR_EQUAL</td>
 <td align="center"><</td>
 </tr>
 <tr>
-<td align="right">EQUALS/LIKE</td>
-<td align="right">:</td>
+<td align="left">EQUALS/LIKE</td>
+<td align="center">:</td>
 </tr>
 <tr>
-<td align="right">page</td>
-<td align="right" colspan="2">default = 0</td>
+<td align="left">page</td>
+<td align="left" colspan="2">default = 0</td>
 </tr>
 <tr>
-<td align="right">limit</td>
-<td align="right" colspan="2">default = data.length</td>
+<td align="left">limit</td>
+<td align="left" colspan="2">default = data.length</td>
 </tr>
 <tr>
-<td align="right">sortBy</td>
-<td align="right" colspan="2">default = maSach,can sortcan sort by multiple fields</td>
+<td align="left">sortBy</td>
+<td align="left" colspan="2">default = maSach,can sortcan sort by multiple fields</td>
 </tr>
 <tr>
-<td align="right" colspan="3">?page=0&limit=1&sortBy=tenSach,donGia,hinhAnhChinh&search=maNhaXuatBan:1,tenSach:Doraemon,donGia>111000</td>
+<td align="left" colspan="3">?page=0&limit=1&sortBy=tenSach,donGia,hinhAnhChinh&search=maNhaXuatBan:1,tenSach:Doraemon,donGia>111000</td>
 </tr>
 </tbody>
 </table>
