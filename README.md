@@ -1,28 +1,85 @@
 # Book-Store Restful API
 
-## Book
+<table>
+<thead>
+<tr>
+<th align="center" colspan="3">Book</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">**Request name**</td>
+<td align="center">**Method**</td>
+<td align="right">**Link**</td>
+</tr>
+<tr>
+<td align="right">_Get All Books_</td>
+<td align="center">GET</td>
+<td align="right">http://localhost:8080/api/v1/books</td>
+</tr>
+<tr>
+<td align="right">_Get Book_</td>
+<td align="center">GET</td>
+<td align="right">http://localhost:8080/api/v1/books/{id_book}</td>
+</tr>
+<tr>
+<td align="right">_Create Book_</td>
+<td align="center">POST</td>
+<td align="right">http://localhost:8080/api/v1/books</td>
+</tr>
+<tr>
+<td align="right">_Update Book_</td>
+<td align="center">PATCH</td>
+<td align="right">http://localhost:8080/api/v1/books/{id_book}</td>
+</tr>
+<tr>
+<td align="right">_Delete Book_</td>
+<td align="center">DELTE</td>
+<td align="right">http://localhost:8080/api/v1/books/{id_book}</td>
+</tr>
+</tbody>
+</table>
 
-| **Request name** | **Method** | **Link**                                     |
-| ---------------- | :--------: | -------------------------------------------- |
-| _Get All Books_  |    GET     | http://localhost:8080/api/v1/books           |
-| _Get Book_       |    GET     | http://localhost:8080/api/v1/books/{id_book} |
-| _Creat Book_     |    POST    | http://localhost:8080/api/v1/books           |
-| _Update Book_    |   PATCH    | http://localhost:8080/api/v1/books/{id_book} |
-| _Delete Book_    |   DELETE   | http://localhost:8080/api/v1/books/{id_book} |
+> Get All Books (with query string)
 
-### Get All Books (with query string)
-
-http://localhost:8080/api/v1/books?search=tenSach:Doragon,donGia>15000&page=0&limit=2&sortBy=tenSach,hinhAnhChinh
-http://localhost:8080/api/v1/books?page=0&limit=1&sortBy=tenSach,hinhAnhChinh&search=maNhaXuatBan:1,tenSach:Doraemon,donGia>111000F
-
-|  Key   | Query                                                | Character |
-| :----: | ---------------------------------------------------- | :-------: | --- |
-| search | GREATER_THAN_OR_EQUAL                                |     >     |
-|   ^^   | LESS_THAN_OR_EQUAL                                   |     <     |
-|   ^^   | EQUALS/LIKE                                          |     :     |
-| limit  | default = data.lenght                                |           |
-|  page  | default = 0                                          |           |     |
-|  sort  | default = maSach,can sortcan sort by multiple fields |           |     |
+<table>
+<thead>
+<tr>
+<th align="right">Key</th>
+<th align="center" colspan="2">Query</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right" rowspan="3">search</td>
+<td align="right">GREATER_THAN_OR_EQUAL</td>
+<td align="center">></td>
+</tr>
+<tr>
+<td align="right">LESS_THAN_OR_EQUAL</td>
+<td align="center"><</td>
+</tr>
+<tr>
+<td align="right">EQUALS/LIKE</td>
+<td align="right">:</td>
+</tr>
+<tr>
+<td align="right">page</td>
+<td align="right" colspan="2">default = 0</td>
+</tr>
+<tr>
+<td align="right">limit</td>
+<td align="right" colspan="2">default = data.length</td>
+</tr>
+<tr>
+<td align="right">sortBy</td>
+<td align="right" colspan="2">default = maSach,can sortcan sort by multiple fields</td>
+</tr>
+<tr>
+<td align="right" colspan="3">?page=0&limit=1&sortBy=tenSach,donGia,hinhAnhChinh&search=maNhaXuatBan:1,tenSach:Doraemon,donGia>111000</td>
+</tr>
+</tbody>
+</table>
 
 ```
 {
