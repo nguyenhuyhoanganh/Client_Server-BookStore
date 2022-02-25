@@ -3,37 +3,37 @@
 <table>
 <thead>
 <tr>
-<th align="center" colspan="3">Book</th>
+<th align="center" colspan="3"><strong>Book</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">**Request name**</td>
-<td align="center">**Method**</td>
-<td align="left">**Link**</td>
+<td align="left"><strong>Request name</strong></td>
+<td align="center"><strong>Method</strong></td>
+<td align="left"><strong>Link</strong></td>
 </tr>
 <tr>
-<td align="left">_Get All Books_</td>
+<td align="left"><em>Get All Books</em></td>
 <td align="center">GET</td>
 <td align="left">http://localhost:8080/api/v1/books</td>
 </tr>
 <tr>
-<td align="left">_Get Book_</td>
+<td align="left"><em>Get Book</em></td>
 <td align="center">GET</td>
 <td align="left">http://localhost:8080/api/v1/books/{id_book}</td>
 </tr>
 <tr>
-<td align="left">_Create Book_</td>
+<td align="left"><em>Create Book</em></td>
 <td align="center">POST</td>
 <td align="left">http://localhost:8080/api/v1/books</td>
 </tr>
 <tr>
-<td align="left">_Update Book_</td>
+<td align="left"><em>Update Book</em></td>
 <td align="center">PATCH</td>
 <td align="left">http://localhost:8080/api/v1/books/{id_book}</td>
 </tr>
 <tr>
-<td align="left">_Delete Book_</td>
+<td align="left"><em>Delete Book</em></td>
 <td align="center">DELTE</td>
 <td align="left">http://localhost:8080/api/v1/books/{id_book}</td>
 </tr>
@@ -41,6 +41,7 @@
 </table>
 
 > Get All Books (with query string)
+> > ?page=0&limit=1&sortBy=tenSach,donGia,hinhAnhChinh&search=maNhaXuatBan:1,tenSach:Doraemon,donGia>111000
 
 <table>
 <thead>
@@ -74,9 +75,6 @@
 <tr>
 <td align="left">sortBy</td>
 <td align="left" colspan="2">default = maSach,can sortcan sort by multiple fields</td>
-</tr>
-<tr>
-<td align="left" colspan="3">?page=0&limit=1&sortBy=tenSach,donGia,hinhAnhChinh&search=maNhaXuatBan:1,tenSach:Doraemon,donGia>111000</td>
 </tr>
 </tbody>
 </table>
