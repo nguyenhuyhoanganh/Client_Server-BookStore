@@ -79,6 +79,8 @@
 </tbody>
 </table>
 
+> Raw json (POST UPDATE)
+
 ```
 {
     "tenSach": "Và Rồi, Tháng 9 Không Có Cậu Đã Tới",
