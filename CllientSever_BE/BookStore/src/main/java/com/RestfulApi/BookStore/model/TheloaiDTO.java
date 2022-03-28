@@ -7,12 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NhaxuatbanModel {
-	private int maNhaSanXuat;
+public class TheloaiDTO {
+	private int maTheLoai;
 
-	private String logo;
+	private String icon;
 
-	private String tenNhaSanXuat;
-
-	private String thongTin;
+	private String tenTheLoai;
 }

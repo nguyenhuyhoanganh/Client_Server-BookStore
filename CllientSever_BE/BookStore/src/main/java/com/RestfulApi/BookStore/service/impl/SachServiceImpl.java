@@ -17,41 +17,41 @@ import com.RestfulApi.BookStore.entity.Nhasanxuat;
 import com.RestfulApi.BookStore.entity.Sach;
 import com.RestfulApi.BookStore.entity.Theloai;
 import com.RestfulApi.BookStore.exception.NotFoundException;
-import com.RestfulApi.BookStore.model.SachModel;
-import com.RestfulApi.BookStore.repository.INhaxuatbanRepository;
-import com.RestfulApi.BookStore.repository.ISachRepository;
-import com.RestfulApi.BookStore.repository.ITheloaiRepository;
+import com.RestfulApi.BookStore.model.SachDTO;
+import com.RestfulApi.BookStore.repository.NhaxuatbanRepository;
+import com.RestfulApi.BookStore.repository.SachRepository;
+import com.RestfulApi.BookStore.repository.TheloaiRepository;
 import com.RestfulApi.BookStore.service.ISachService;
-import com.RestfulApi.BookStore.util.SachSpecificationsBuilder;
+import com.RestfulApi.BookStore.util.GenericSpecificationBuilder;
 
 @Service
 @Transactional
 public class SachServiceImpl implements ISachService {
 
 	@Autowired
-	private ISachRepository sachRepository;
+	private SachRepository sachRepository;
 	@Autowired
-	private ITheloaiRepository theloaiRepository;
+	private TheloaiRepository theloaiRepository;
 	@Autowired
-	private INhaxuatbanRepository nhaxuatbanRepository;
+	private NhaxuatbanRepository nhaxuatbanRepository;
 
 	@Override
-	public List<SachModel> getAll(String search, Integer page, Integer limit, String sortBy) {
-		List<SachModel> listSachModels = new ArrayList<SachModel>();
+	public List<SachDTO> getAll(String search, Integer page, Integer limit, String sortBy) {
+		List<SachDTO> listSachModels = new ArrayList<SachDTO>();
 
 		// search
-		SachSpecificationsBuilder builder = new SachSpecificationsBuilder();
+		GenericSpecificationBuilder builder = new GenericSpecificationBuilder();
 		Pattern patternSearch = Pattern.compile("(\\w+?)(:|<|>)(\\w+( +\\w+)*$?),", Pattern.UNICODE_CHARACTER_CLASS);
 		Matcher matcherSearch = patternSearch.matcher(search + ",");
 		while (matcherSearch.find()) {
 			if (matcherSearch.group(1).compareTo("maTheLoai") == 0) {
 				builder.with("theloai", matcherSearch.group(2),
-						theloaiRepository.findById(Integer.parseInt(matcherSearch.group(3))).get());
+						theloaiRepository.findById(Integer.parseInt(matcherSearch.group(3))).get(), "Sach");
 			} else if (matcherSearch.group(1).compareTo("maNhaXuatBan") == 0) {
 				builder.with("nhasanxuat", matcherSearch.group(2),
-						nhaxuatbanRepository.findById(Integer.parseInt(matcherSearch.group(3))).get());
+						nhaxuatbanRepository.findById(Integer.parseInt(matcherSearch.group(3))).get(), "Sach");
 			} else {
-				builder.with(matcherSearch.group(1), matcherSearch.group(2), matcherSearch.group(3));
+				builder.with(matcherSearch.group(1), matcherSearch.group(2), matcherSearch.group(3), "Sach");
 			}
 		}
 
@@ -71,14 +71,14 @@ public class SachServiceImpl implements ISachService {
 
 		// convert to Model
 		for (Sach sach : listSaches) {
-			SachModel sachModel = mapToModel(sach);
+			SachDTO sachModel = mapToModel(sach);
 			listSachModels.add(sachModel);
 		}
 		return listSachModels;
 	}
 
 	@Override
-	public SachModel getById(int id) {
+	public SachDTO getById(int id) {
 		Optional<Sach> sach = sachRepository.findById(id);
 		if (!sach.isPresent())
 			throw new NotFoundException("Không tìm thấy sách có id: " + id);
@@ -86,7 +86,7 @@ public class SachServiceImpl implements ISachService {
 	}
 
 	@Override
-	public SachModel create(SachModel sachModel) {
+	public SachDTO create(SachDTO sachModel) {
 		Sach sach = sachRepository.save(maptoEntity(sachModel));
 		return mapToModel(sach);
 	}
@@ -100,7 +100,7 @@ public class SachServiceImpl implements ISachService {
 	}
 
 	@Override
-	public SachModel update(int id, SachModel sachModel) {
+	public SachDTO update(int id, SachDTO sachModel) {
 		Sach sach = sachRepository.findById(id).get();
 		sach = updatetoEntity(sachModel, sach);
 		sachRepository.save(sach);
@@ -112,8 +112,8 @@ public class SachServiceImpl implements ISachService {
 		return sachRepository.count();
 	}
 
-	public SachModel mapToModel(Sach sach) {
-		SachModel sachModel = new SachModel();
+	public SachDTO mapToModel(Sach sach) {
+		SachDTO sachModel = new SachDTO();
 		sachModel.setMaSach(sach.getMaSach());
 		sachModel.setHinhAnhChinh(sach.getHinhAnhChinh());
 		sachModel.setDsHinhAnhPhu(sach.getDsHinhAnhPhu());
@@ -133,7 +133,7 @@ public class SachServiceImpl implements ISachService {
 		return sachModel;
 	}
 
-	public Sach maptoEntity(SachModel sachModel) {
+	public Sach maptoEntity(SachDTO sachModel) {
 		Sach sach = new Sach();
 		sach.setDonGia(sachModel.getDonGia());
 		sach.setDsHinhAnhPhu(sachModel.getDsHinhAnhPhu());
@@ -156,7 +156,7 @@ public class SachServiceImpl implements ISachService {
 		return sach;
 	}
 
-	public Sach updatetoEntity(SachModel sachModel, Sach sach) {
+	public Sach updatetoEntity(SachDTO sachModel, Sach sach) {
 		if (sachModel.getDonGia() >= 0)
 			sach.setDonGia(sachModel.getDonGia());
 		if (sachModel.getDsHinhAnhPhu() != null)

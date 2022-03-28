@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SachModel {
+public class SachDTO {
 	private Integer maSach;
 
 	@PositiveOrZero(message = "Đơn giá cần là số nguyên lớn hơn 0", groups = { OnUpdate.class, OnCreate.class })

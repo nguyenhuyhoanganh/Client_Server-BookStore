@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.RestfulApi.BookStore.model.SachModel;
+import com.RestfulApi.BookStore.model.SachDTO;
 import com.RestfulApi.BookStore.service.ISachService;
 import com.RestfulApi.BookStore.valid.OnCreate;
 import com.RestfulApi.BookStore.valid.OnUpdate;
@@ -40,19 +40,19 @@ public class SachController {
 //	}
 
 	@GetMapping(value = "/books/{id}")
-	public SachModel getOne(@PathVariable int id) {
-		SachModel sachModel = sachService.getById(id);
+	public SachDTO getOne(@PathVariable int id) {
+		SachDTO sachModel = sachService.getById(id);
 		return sachModel;
 	}
 
 	@PostMapping(value = "/books")
-	public ResponseEntity<SachModel> create(@RequestBody @Validated(OnCreate.class) SachModel sachModel) {
+	public ResponseEntity<SachDTO> create(@RequestBody @Validated(OnCreate.class) SachDTO sachModel) {
 		Timestamp date = new Timestamp(new Date().getTime());
 		sachModel.setNgayTao(date);
 		sachModel.setNgayCapNhat(date);
 		if (sachModel.getSoLuongMua() <= 0)
 			sachModel.setSoLuongMua(0);
-		SachModel savedSach = sachService.create(sachModel);
+		SachDTO savedSach = sachService.create(sachModel);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(savedSach.getMaSach()).toUri();
 		return ResponseEntity.created(location).build();
@@ -65,14 +65,14 @@ public class SachController {
 	}
 
 	@PatchMapping(value = "/books/{id}")
-	public ResponseEntity<SachModel> update(@PathVariable int id,
-			@RequestBody @Validated(OnUpdate.class) SachModel sachModel) {
+	public ResponseEntity<SachDTO> update(@PathVariable int id,
+			@RequestBody @Validated(OnUpdate.class) SachDTO sachModel) {
 		sachModel.setNgayCapNhat(new Timestamp(new Date().getTime()));
 		return ResponseEntity.ok().body(sachService.update(id, sachModel));
 	}
 
 	@GetMapping(value = "/books")
-	public List<SachModel> getAll(@RequestParam(value = "search", required = false) String search,
+	public List<SachDTO> getAll(@RequestParam(value = "search", required = false) String search,
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "sortBy", required = false) String sortBy) {

@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.RestfulApi.BookStore.entity.Theloai;
 
-public interface ITheloaiRepository extends JpaRepository<Theloai, Integer>{
+public interface TheloaiRepository extends JpaRepository<Theloai, Integer>{
 
 }

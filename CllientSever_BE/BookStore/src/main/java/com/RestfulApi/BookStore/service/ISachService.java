@@ -2,19 +2,19 @@ package com.RestfulApi.BookStore.service;
 
 import java.util.List;
 
-import com.RestfulApi.BookStore.model.SachModel;
+import com.RestfulApi.BookStore.model.SachDTO;
 
 public interface ISachService {
 
-	public List<SachModel> getAll(String search, Integer page, Integer limit, String sortBy);
+	public List<SachDTO> getAll(String search, Integer page, Integer limit, String sortBy);
 
-	public SachModel getById(int id);
+	public SachDTO getById(int id);
 
-	public SachModel create(SachModel sachModel);
+	public SachDTO create(SachDTO sachModel);
 
 	public void delete(int id);
 
-	public SachModel update(int id, SachModel sachModel);
+	public SachDTO update(int id, SachDTO sachModel);
 	
 	public long Count();
 }
